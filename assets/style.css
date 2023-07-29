@@ -22,7 +22,7 @@ body
 /* defines display settings for quiz title & question titles */
 h1
 {
-    font-size: 200%;
+    font-size: 180%;
     font-weight: 700;
 }
 
@@ -45,6 +45,8 @@ h1
     width: 70%;
     margin: 7% 15%;
 }
+
+/* ADD MEDIA QUERY TO ADJUST HORIZONTAL MARGINS AT SMALL PAGE WIDTH HERE */
 
 /* aligns start menu content with the middle of the page */
 #start-menu
