@@ -95,3 +95,9 @@ ol
     padding: 10px 20px;
     width: auto;
 }
+
+/* hides question content structure initially */
+#question-content
+{
+    display: none;
+}
