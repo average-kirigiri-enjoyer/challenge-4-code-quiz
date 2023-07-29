@@ -1,0 +1,77 @@
+/*
+ethan (average-kirigiri-enjoyer)
+SCS Boot Camp Module 4 Weekly Challenge - Code Quiz
+Created 2023/07/29
+Last Edited 2023/07/29
+*/
+
+/* defines variables for HTML colour codes */
+:root
+{
+    --deep-purple: #582f92;
+    --lavender: #a380e5;
+}
+
+/* changes default font & text size */
+body
+{
+    font-family: Raleway;
+    font-size: 28px;
+}
+
+/* defines display settings for quiz title & question titles */
+h1
+{
+    font-size: 200%;
+    font-weight: 700;
+}
+
+/* child elements of header (view high scores & time) are displayed in-line with each other */
+.header > *
+{
+    display: inline-block;
+    padding: 25px;
+}
+
+/* timer floats to the right */
+#timer
+{
+    float: right;
+}
+
+/* defines display settings for current quiz content */
+#quiz-content > *
+{
+    width: 70%;
+    margin: 7% 15%;
+}
+
+/* aligns start menu content with the middle of the page */
+#start-menu
+{
+    text-align: center;
+}
+
+/* defines margins for start menu child elements */
+#start-menu > *
+{
+    margin: 10px;
+}
+
+/* defines display settings for quiz buttons */
+.quiz-button
+{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 12px;
+    color: white;
+    background-color: var(--deep-purple);
+    cursor: pointer;
+}
+
+/* quiz buttons change colour when hovered */
+.quiz-button:hover
+{
+  background-color: var(--lavender);
+  transition: 0.15s;
+}
