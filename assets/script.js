@@ -9,6 +9,7 @@ Last Edited 2023/07/29
 var timeLeft = 75;
 var correctAnswer = "";
 var currentQuestion = 1;
+var interrupted = 0;
 
 //gets references to HTML elements that will be modified or referred to
 var quizTimer = document.getElementById("timer");
@@ -145,11 +146,10 @@ function beginQuizAttempt()
 
 //checks if the choosen answer is correct
 function checkAnswer()
-{
-    //exits function if the user clicked outside the multiple choice option boxes
+{    
+    //exits function if the user clicked outside the multiple choice boxes
     if (!(event.target.matches("button") || event.target.matches("li")))
     {
-        console.log("a button was not clicked");
         return;
     }
 
@@ -170,14 +170,23 @@ function checkAnswer()
         timeLeft -= 10;
     }
 
-    //hides right / wrong message after two seconds
-    setTimeout(function()
-    {
-        correct.setAttribute("style", "display: none");
-        wrong.setAttribute("style", "display: none");
-    }, 2000);
+    //hides right / wrong message after around two seconds if the user has not chosen another answer
+    interrupted += 2;
 
-    //generates next quiz question
+    var hideRightOrWrong = setInterval(function()
+    {
+        interrupted--;
+
+        if (interrupted <= 0)
+        {
+            correct.setAttribute("style", "display: none");
+            wrong.setAttribute("style", "display: none");
+            clearInterval(hideRightOrWrong);
+            interrupted = 0;
+        }
+    }, 1000);
+
+    //proceeds to next quiz question
     currentQuestion++;
     generateQuestions();
 }
