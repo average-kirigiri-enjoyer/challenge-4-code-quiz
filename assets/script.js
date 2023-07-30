@@ -82,6 +82,35 @@ function endAttempt()
     //goes to submit screen n stuff
 }
 
+//changes quiz question content based on which question should be displayed
+function generateQuestions()
+{
+    if (currentQuestion === 1)
+    {
+        generateQuestion1();
+    }
+    else if (currentQuestion === 2)
+    {
+        generateQuestion2();
+    }
+    else if (currentQuestion === 3)
+    {
+        generateQuestion3();
+    }
+    else if (currentQuestion === 4)
+    {
+        generateQuestion4();
+    }
+    else if (currentQuestion === 5)
+    {
+        generateQuestion5();
+    }
+    else
+    {
+        endAttempt();
+    }
+}
+
 function beginQuizAttempt()
 {
     //sets / resets initial variables for quiz content flow
@@ -117,18 +146,27 @@ function beginQuizAttempt()
 //checks if the choosen answer is correct
 function checkAnswer()
 {
+    //exits function if the user clicked outside the multiple choice option boxes
+    if (!(event.target.matches("button") || event.target.matches("li")))
+    {
+        console.log("a button was not clicked");
+        return;
+    }
+
     //gets text value of multiple choice option selected by user
     var chosenAnswer = event.target.textContent;
 
-    //checks if chosen option is correct, and displays a message informing user of which is the case
+    //checks if chosen option is correct, and displays a message informing user of which is the case, and hides previous message if applicable
     if (chosenAnswer === correctAnswer)
     {
         correct.setAttribute("style", "display: block");
+        wrong.setAttribute("style", "display: none");
     }
     else
     {
         //if the user was wrong, reduce remaining time by 10 seconds
         wrong.setAttribute("style", "display: block");
+        correct.setAttribute("style", "display: none");
         timeLeft -= 10;
     }
 
@@ -146,32 +184,7 @@ function checkAnswer()
 
 function viewHighScores()
 {
-    
-}
-
-//changes quiz question content based on which question should be displayed
-function generateQuestions()
-{
-    if (currentQuestion === 1)
-    {
-        generateQuestion1();
-    }
-    if (currentQuestion === 2)
-    {
-        generateQuestion2();
-    }
-    if (currentQuestion === 3)
-    {
-        generateQuestion3();
-    }
-    if (currentQuestion === 4)
-    {
-        generateQuestion4();
-    }
-    else
-    {
-        generateQuestion5();
-    }
+    //switch to high score list n' stuff
 }
 
 //switches view to high score list
