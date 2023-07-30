@@ -55,11 +55,20 @@ Last Edited 2023/07/29
 
         <div id = "high-score-submission" class = "quiz-section-block">
 
-            <h1>All done!</h1>
+            <h1 class = "high-score-header">All done!</h1>
             <p id = "final-score"></p>
-            <p class = "submit-row">Enter initials:</p>
-            <input class = "submit-row" type = "text">
-            <button id = "submit-button" class = "quiz-button submit-row">Submit</button>
+            <p class = "high-score-row">Enter initials:</p>
+            <input class = "high-score-row" type = "text">
+            <button id = "submit-button" class = "high-score-button quiz-button high-score-row">Submit</button>
+
+        </div>
+
+        <div id = "high-score-display-menu" class = "quiz-section-block">
+
+            <h1 class = "high-score-header">High scores</h1>
+            <ol id = high-scores-display></ol>
+            <button id = "go-back" class = "high-score-button high-score-row">Go back</button>
+            <button id = "clear-high-scores" class = "high-score-button high-score-row">Clear high scores</button>
 
         </div>
 
