@@ -22,15 +22,25 @@ body
 /* defines display settings for quiz title & question titles */
 h1
 {
-    font-size: 200%;
+    font-size: 180%;
     font-weight: 700;
+}
+
+/* ADD MEDIA QUERY TO ADJUST HEADER TEXT SIZE AT SMALL PAGE WIDTH HERE */
+
+/* list items will be displayed with numbers in descending order*/
+ol
+{
+    list-style-type: decimal;
+    display: flex;
+    flex-direction: column;
 }
 
 /* child elements of header (view high scores & time) are displayed in-line with each other */
 .header > *
 {
     display: inline-block;
-    padding: 25px;
+    padding: 20px;
 }
 
 /* timer floats to the right */
@@ -43,7 +53,15 @@ h1
 #quiz-content > *
 {
     width: 70%;
-    margin: 7% 15%;
+    margin: 3% 15%;
+}
+
+/* ADD MEDIA QUERY TO ADJUST HORIZONTAL MARGINS AT SMALL PAGE WIDTH HERE */
+
+/* defines margins for child elements of quiz section blocks */
+.quiz-section-block > *
+{
+    margin: 10px;
 }
 
 /* aligns start menu content with the middle of the page */
@@ -52,21 +70,18 @@ h1
     text-align: center;
 }
 
-/* defines margins for start menu child elements */
-#start-menu > *
-{
-    margin: 10px;
-}
-
 /* defines display settings for quiz buttons */
 .quiz-button
 {
-    padding: 10px 20px;
+    padding: 10px 40px;
+    margin: 5px;
     border: none;
     border-radius: 12px;
     color: white;
     background-color: var(--deep-purple);
     cursor: pointer;
+    width: 300px;
+    text-align: left;
 }
 
 /* quiz buttons change colour when hovered */
@@ -74,4 +89,28 @@ h1
 {
   background-color: var(--lavender);
   transition: 0.15s;
+}
+
+/* defines alternate padding & width for start button */
+#start-button
+{
+    padding: 10px 20px;
+    width: auto;
+}
+
+/* hides question content structure initially */
+#question-content
+{
+    display: none;
+}
+
+h2
+{
+    padding-top: 10px;
+    padding-left: 10px;
+    border-top: solid 3px black;
+    font-weight: 400;
+    font-size: 140%;
+    font-style: italic;
+    display: none;
 }

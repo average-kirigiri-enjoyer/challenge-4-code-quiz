@@ -25,18 +25,38 @@ Last Edited 2023/07/29
 
     <div class = "header">
 
-        <div id = "timer">Time: 0</div>
+        <div id = "timer">Time: 75</div>
         <div id = "HSLink">View high scores</div>
 
     </div>
 
     <div id = "quiz-content">
 
-        <div id = "start-menu">
+        <div id = "start-menu" class = "quiz-section-block">
 
             <h1>Timed Coding Quiz</h1>
             <p>See how quickly you can answer the following code-related questions. Note that incorrect answers will result in a 10-second time loss!</p>
-            <button class = "quiz-button">Start Quiz</button> 
+            <button id = "start-button" class = "quiz-button">Start Quiz</button> 
+
+        </div>
+
+        <div id = "question-content" class = "quiz-section-block">
+
+            <h1 id = "question-title"></h1>
+            <ol id = "answer-options">
+
+                <button id = "option-1" class = quiz-button><li></li></button>
+                <button id = "option-2" class = quiz-button><li></li></button>
+                <button id = "option-3" class = quiz-button><li></li></button>
+                <button id = "option-4" class = quiz-button><li></li></button>
+
+            </ol>
+        </div>
+
+        <div>
+
+            <h2 id = "correct">Correct!</h2>
+            <h2 id = "wrong">Wrong!</h2>
 
         </div>
 
