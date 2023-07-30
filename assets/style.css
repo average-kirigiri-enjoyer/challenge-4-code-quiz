@@ -26,6 +26,8 @@ h1
     font-weight: 700;
 }
 
+/* ADD MEDIA QUERY TO ADJUST HEADER TEXT SIZE AT SMALL PAGE WIDTH HERE */
+
 /* list items will be displayed with numbers in descending order*/
 ol
 {
@@ -56,16 +58,16 @@ ol
 
 /* ADD MEDIA QUERY TO ADJUST HORIZONTAL MARGINS AT SMALL PAGE WIDTH HERE */
 
-/* aligns start menu content with the middle of the page */
-#start-menu
-{
-    text-align: center;
-}
-
 /* defines margins for child elements of quiz section blocks */
 .quiz-section-block > *
 {
     margin: 10px;
+}
+
+/* aligns start menu content with the middle of the page */
+#start-menu
+{
+    text-align: center;
 }
 
 /* defines display settings for quiz buttons */
@@ -99,5 +101,16 @@ ol
 /* hides question content structure initially */
 #question-content
 {
+    display: none;
+}
+
+h2
+{
+    padding-top: 10px;
+    padding-left: 20px;
+    border-top: solid 3px black;
+    font-weight: 400;
+    font-size: 140%;
+    font-style: italic;
     display: none;
 }
