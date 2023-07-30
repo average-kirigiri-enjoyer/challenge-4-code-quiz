@@ -5,11 +5,12 @@ Created 2023/07/29
 Last Edited 2023/07/29
 */
 
-//variables used for quiz content flow
+//variables used for quiz content flow & high score data storage
 var timeLeft = 75;
 var correctAnswer = "";
 var currentQuestion = 1;
 var interrupted = 0;
+var highScoresList = [];
 
 //gets references to various HTML elements that will be modified or referred to
 var quizTimer = document.getElementById("timer");
@@ -92,6 +93,12 @@ function endAttempt()
     submitButton.disabled = false;
 }
 
+//retrieves high score list from local storage and converts it back from a JSON string to its original form
+function getHighScores()
+{
+    return JSON.parse(localStorage.getItem("highScoresList"));
+}
+
 //submits high score to local data storage
 function submitScore()
 {
@@ -106,6 +113,12 @@ function submitScore()
         return;
     }
 
+    //retrieves high scores list from local storage if it exists
+    if (localStorage.getItem("highScoresList"))
+    {
+        highScoresList = getHighScores();
+    }   
+    
     //saves initials and score as an object
     var highScore =
     {
@@ -113,10 +126,12 @@ function submitScore()
         score: timeLeft
     };
 
-    console.log(highScore)
+    //adds new high score submission to list
+    highScoresList.push(highScore);
+    console.log(highScoresList);
 
-    //submits high score data to local storage as a JSON string, disables submit button, and clears initials
-    localStorage.setItem("highScore", JSON.stringify(highScore));
+    //submits high score data to local storage as a JSON string, disables submit button, and clears initials input box
+    localStorage.setItem("highScoresList", JSON.stringify(highScoresList));
     initialsInput.value = "";
     submitButton.disabled = true;
 }
