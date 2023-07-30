@@ -16,10 +16,10 @@ var quizTimer = document.getElementById("timer");
 var questionContent = document.getElementById("question-content");
 var questionTitle = document.getElementById("question-title");
 var answerOptions = document.getElementById("answer-options");
-var option1 = document.getElementById("option-1");
-var option2 = document.getElementById("option-2");
-var option3 = document.getElementById("option-3");
-var option4 = document.getElementById("option-4");
+var option1 = document.getElementById("option-1").children[0];
+var option2 = document.getElementById("option-2").children[0];
+var option3 = document.getElementById("option-3").children[0];
+var option4 = document.getElementById("option-4").children[0];
 var correct = document.getElementById("correct");
 var wrong = document.getElementById("wrong");
 
@@ -27,10 +27,10 @@ var wrong = document.getElementById("wrong");
 function generateQuestion1()
 {
     questionTitle.textContent = "Commonly used data types do NOT include:";
-    option1.children[0].textContent = "strings";
-    option2.children[0].textContent = "booleans";
-    option3.children[0].textContent = "alerts";
-    option4.children[0].textContent = "numbers";
+    option1.textContent = "strings";
+    option2.textContent = "booleans";
+    option3.textContent = "alerts";
+    option4.textContent = "numbers";
     correctAnswer = "alerts";
 }
 
@@ -38,10 +38,10 @@ function generateQuestion1()
 function generateQuestion2()
 {
     questionTitle.textContent = "The condition in an if / else statement is enclosed with ________.";
-    option1.children[0].textContent = "quotes";
-    option2.children[0].textContent = "curly brackets";
-    option3.children[0].textContent = "parentheses";
-    option4.children[0].textContent = "square brackets";
+    option1.textContent = "quotes";
+    option2.textContent = "curly brackets";
+    option3.textContent = "parentheses";
+    option4.textContent = "square brackets";
     correctAnswer = "parentheses";
 }
 
@@ -49,10 +49,10 @@ function generateQuestion2()
 function generateQuestion3()
 {
     questionTitle.textContent = "Arrays in JavaScript can be used to store ________.";
-    option1.children[0].textContent = "numbers and strings";
-    option2.children[0].textContent = "other arrays";
-    option3.children[0].textContent = "booleans";
-    option4.children[0].textContent = "all of the above";
+    option1.textContent = "numbers and strings";
+    option2.textContent = "other arrays";
+    option3.textContent = "booleans";
+    option4.textContent = "all of the above";
     correctAnswer = "all of the above";
 }
 
@@ -60,10 +60,10 @@ function generateQuestion3()
 function generateQuestion4()
 {
     questionTitle.textContent = "String values must be enclosed within ________ when being assigned to variables.";
-    option1.children[0].textContent = "commas";
-    option2.children[0].textContent = "curly brackets";
-    option3.children[0].textContent = "quotes";
-    option4.children[0].textContent = "parentheses";
+    option1.textContent = "commas";
+    option2.textContent = "curly brackets";
+    option3.textContent = "quotes";
+    option4.textContent = "parentheses";
     correctAnswer = "quotes";
 }
 
@@ -71,16 +71,18 @@ function generateQuestion4()
 function generateQuestion5()
 {
     questionTitle.textContent = "A very useful tool used during development and debugging for printing content to the debugger is:";
-    option1.children[0].textContent = "JavaScript";
-    option2.children[0].textContent = "terminal / bash";
-    option3.children[0].textContent = "for loops";
-    option4.children[0].textContent = "console.log()";
+    option1.textContent = "JavaScript";
+    option2.textContent = "terminal / bash";
+    option3.textContent = "for loops";
+    option4.textContent = "console.log()";
     correctAnswer = "console.log()";
 }
 
+//hides quiz content, stops timer, and displays high score submission menu
 function endAttempt()
 {
-    //goes to submit screen n stuff
+    questionContent.setAttribute("style", "display: none");
+    clearInterval(quizTimerCountdown);
 }
 
 //changes quiz question content based on which question should be displayed
@@ -112,38 +114,6 @@ function generateQuestions()
     }
 }
 
-function beginQuizAttempt()
-{
-    //sets / resets initial variables for quiz content flow
-    timeLeft = 75;
-    correctAnswer = "";
-    currentQuestion = 1;
-
-    //hides start menu, unhides question content structure
-    document.getElementById("start-menu").setAttribute("style", "display: none");
-    questionContent.setAttribute("style", "display: block");
-
-    //begins quiz timer countdown, quiz ends once timer is less than or equal to 0
-    var quizTimerCountdown = setInterval(function()
-    {
-        timeLeft--;
-        quizTimer.textContent = "Timer: " + timeLeft;
-
-        if (timeLeft <= 0)
-        {
-            clearInterval(quizTimerCountdown);
-            quizTimer.textContent = "Timer: 0"
-            endAttempt();
-        }
-    }, 1000);
-
-    //begins displaying quiz questions
-    generateQuestions();
-
-    //when the user clicks one of the multiple choice options, checks if their answer is correct
-    answerOptions.addEventListener("click", checkAnswer);
-}
-
 //checks if the choosen answer is correct
 function checkAnswer()
 {    
@@ -156,7 +126,7 @@ function checkAnswer()
     //gets text value of multiple choice option selected by user
     var chosenAnswer = event.target.textContent;
 
-    //checks if chosen option is correct, and displays a message informing user of which is the case, and hides previous message if applicable
+    //checks if chosen option is correct, and displays a message informing user of which is the case, hiding previous message if applicable
     if (chosenAnswer === correctAnswer)
     {
         correct.setAttribute("style", "display: block");
@@ -175,6 +145,7 @@ function checkAnswer()
 
     var hideRightOrWrong = setInterval(function()
     {
+        //prevents right / wrong message from disappearing too quickly if the user chooses multiple answers in succession
         interrupted--;
 
         if (interrupted <= 0)
@@ -196,8 +167,40 @@ function viewHighScores()
     //switch to high score list n' stuff
 }
 
+function beginQuizAttempt()
+{
+    //sets / resets initial variables for quiz content flow
+    timeLeft = 75;
+    correctAnswer = "";
+    currentQuestion = 1;
+
+    //hides start menu, unhides question content structure
+    document.getElementById("start-menu").setAttribute("style", "display: none");
+    questionContent.setAttribute("style", "display: block");
+
+    //begins quiz timer countdown, quiz ends once timer is less than or equal to 0
+    quizTimerCountdown = setInterval(function()
+    {
+        timeLeft--;
+        quizTimer.textContent = "Timer: " + timeLeft;
+
+        if (timeLeft <= 0)
+        {
+            clearInterval(quizTimerCountdown);
+            quizTimer.textContent = "Timer: 0"
+            endAttempt();
+        }
+    }, 1000);
+
+    //begins displaying quiz questions
+    generateQuestions();
+}
+
 //switches view to high score list
 document.getElementById("HSLink").addEventListener("click", viewHighScores);
 
 //begins quiz attempt when start button is clicked
 document.getElementById("start-button").addEventListener("click", beginQuizAttempt);
+
+//when the user clicks one of the multiple choice options, checks if their answer is correct
+answerOptions.addEventListener("click", checkAnswer);

@@ -28,6 +28,18 @@ h1
 
 /* ADD MEDIA QUERY TO ADJUST HEADER TEXT SIZE AT SMALL PAGE WIDTH HERE */
 
+/* defines display settings for right / wrong messages */
+h2
+{
+    padding-top: 10px;
+    padding-left: 10px;
+    border-top: solid 3px black;
+    font-weight: 400;
+    font-size: 140%;
+    font-style: italic;
+    display: none;
+}
+
 /* list items will be displayed with numbers in descending order*/
 ol
 {
@@ -98,19 +110,21 @@ ol
     width: auto;
 }
 
+/* defines alternate padding & width for submit score button */
+#submit-button
+{
+    padding: 3px 15px;
+    width: auto;
+}
+
 /* hides question content structure initially */
 #question-content
 {
     display: none;
 }
 
-h2
+/* hides high score submission content initially */
+#high-score-submission
 {
-    padding-top: 10px;
-    padding-left: 10px;
-    border-top: solid 3px black;
-    font-weight: 400;
-    font-size: 140%;
-    font-style: italic;
     display: none;
 }
