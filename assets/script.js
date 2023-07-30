@@ -20,6 +20,7 @@ var option1 = document.getElementById("option-1").children[0];
 var option2 = document.getElementById("option-2").children[0];
 var option3 = document.getElementById("option-3").children[0];
 var option4 = document.getElementById("option-4").children[0];
+var highScoreSubmission = document.getElementById("high-score-submission");
 var correct = document.getElementById("correct");
 var wrong = document.getElementById("wrong");
 
@@ -81,8 +82,10 @@ function generateQuestion5()
 //hides quiz content, stops timer, and displays high score submission menu
 function endAttempt()
 {
-    questionContent.setAttribute("style", "display: none");
     clearInterval(quizTimerCountdown);
+    questionContent.setAttribute("style", "display: none");
+    highScoreSubmission.setAttribute("style", "display: block");
+    
 }
 
 //changes quiz question content based on which question should be displayed

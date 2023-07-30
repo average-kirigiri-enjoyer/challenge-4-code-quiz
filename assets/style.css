@@ -117,6 +117,12 @@ ol
     width: auto;
 }
 
+/* displays enter initials message, input box, and submit button in-line with each other */
+.submit-row
+{
+    display: inline-block;
+}
+
 /* hides question content structure initially */
 #question-content
 {
@@ -127,4 +133,10 @@ ol
 #high-score-submission
 {
     display: none;
+}
+
+/* slightly increases margin for all done message in high score submission menu */
+#high-score-submission h1
+{
+    margin-bottom: 20px;
 }
