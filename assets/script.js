@@ -11,7 +11,7 @@ var correctAnswer = "";
 var currentQuestion = 1;
 var interrupted = 0;
 
-//gets references to HTML elements that will be modified or referred to
+//gets references to various HTML elements that will be modified or referred to
 var quizTimer = document.getElementById("timer");
 var questionContent = document.getElementById("question-content");
 var questionTitle = document.getElementById("question-title");
@@ -21,6 +21,8 @@ var option2 = document.getElementById("option-2").children[0];
 var option3 = document.getElementById("option-3").children[0];
 var option4 = document.getElementById("option-4").children[0];
 var highScoreSubmission = document.getElementById("high-score-submission");
+var initialsInput = document.querySelector("input");
+var submitButton = document.getElementById("submit-button");
 var correct = document.getElementById("correct");
 var wrong = document.getElementById("wrong");
 
@@ -79,13 +81,44 @@ function generateQuestion5()
     correctAnswer = "console.log()";
 }
 
-//hides quiz content, stops timer, and displays high score submission menu
+//hides quiz content, stops & updates timer, displays high score submission menu, and enables submit button if applicable
 function endAttempt()
 {
     clearInterval(quizTimerCountdown);
     questionContent.setAttribute("style", "display: none");
     highScoreSubmission.setAttribute("style", "display: block");
-    
+    quizTimer.textContent = "Timer: " + timeLeft;
+    document.getElementById("final-score").textContent = "Final Score: " + timeLeft;
+    submitButton.disabled = false;
+}
+
+//submits high score to local data storage
+function submitScore()
+{
+    //gets initials input by user from text box
+    var userInitials = initialsInput.value;
+    console.log(userInitials)
+
+    //if user did not type in any initials, eject from function
+    if (!userInitials)
+    {
+        console.log("no initials entered")
+        return;
+    }
+
+    //saves initials and score as an object
+    var highScore =
+    {
+        initials: userInitials,
+        score: timeLeft
+    };
+
+    console.log(highScore)
+
+    //submits high score data to local storage as a JSON string, disables submit button, and clears initials
+    localStorage.setItem("highScore", JSON.stringify(highScore));
+    initialsInput.value = "";
+    submitButton.disabled = true;
 }
 
 //changes quiz question content based on which question should be displayed
@@ -207,3 +240,5 @@ document.getElementById("start-button").addEventListener("click", beginQuizAttem
 
 //when the user clicks one of the multiple choice options, checks if their answer is correct
 answerOptions.addEventListener("click", checkAnswer);
+
+submitButton.addEventListener("click", submitScore);
