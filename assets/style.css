@@ -27,7 +27,28 @@ h1
     font-weight: 700;
 }
 
-/* ADD MEDIA QUERY TO ADJUST HEADER TEXT SIZE AT SMALL PAGE WIDTH HERE */
+/* reduces header size at small window sizes */
+@media screen and (max-width: 720px)
+{
+    h1
+    {
+        font-size: 160%;
+    }
+}
+
+/* reduces header size and initials input width at very small window sizes */
+@media screen and (max-width: 520px)
+{
+    h1
+    {
+        font-size: 140%;
+    }
+
+    input
+    {
+        width: 300px;
+    }
+}
 
 /* defines display settings for right / wrong messages */
 h2
@@ -81,8 +102,6 @@ ol
     width: 70%;
     margin: 3% 15%;
 }
-
-/* ADD MEDIA QUERY TO ADJUST HORIZONTAL MARGINS AT SMALL PAGE WIDTH HERE */
 
 /* defines margins for child elements of quiz section blocks */
 .quiz-section-block > *
