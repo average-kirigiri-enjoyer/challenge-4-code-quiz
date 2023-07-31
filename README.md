@@ -16,3 +16,6 @@ https://fonts.google.com/specimen/Raleway
 
 [selector] > * syntax (./assets/style.css, line HELLO ETHAN PUT LINES WHERE THIS IS USED HERE)
 https://linuxhint.com/css-apply-all-children/
+
+word-wrap syntax (./assets/style.css, line 201);
+https://www.w3schools.com/cssref/css3_pr_word-wrap.php

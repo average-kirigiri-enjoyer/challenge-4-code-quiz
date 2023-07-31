@@ -2,7 +2,7 @@
 ethan (average-kirigiri-enjoyer)
 SCS Boot Camp Module 4 Weekly Challenge - Code Quiz
 Created 2023/07/29
-Last Edited 2023/07/29
+Last Edited 2023/07/31
 */
 
 /* defines variables for HTML colour codes */
@@ -27,7 +27,28 @@ h1
     font-weight: 700;
 }
 
-/* ADD MEDIA QUERY TO ADJUST HEADER TEXT SIZE AT SMALL PAGE WIDTH HERE */
+/* reduces header size at small window sizes */
+@media screen and (max-width: 720px)
+{
+    h1
+    {
+        font-size: 160%;
+    }
+}
+
+/* reduces header size and initials input width at very small window sizes */
+@media screen and (max-width: 520px)
+{
+    h1
+    {
+        font-size: 140%;
+    }
+
+    input
+    {
+        width: 300px;
+    }
+}
 
 /* defines display settings for right / wrong messages */
 h2
@@ -56,6 +77,7 @@ ol
     padding: 20px;
 }
 
+/* defines display settings for view high scores link */
 #HSLink
 {
     color: var(--deep-purple);
@@ -63,6 +85,7 @@ ol
     cursor: pointer;
 }
 
+/* high scores link changes colour when hovered */
 #HSLink:hover
 {
     color: var(--light-lavender);
@@ -81,8 +104,6 @@ ol
     width: 70%;
     margin: 3% 15%;
 }
-
-/* ADD MEDIA QUERY TO ADJUST HORIZONTAL MARGINS AT SMALL PAGE WIDTH HERE */
 
 /* defines margins for child elements of quiz section blocks */
 .quiz-section-block > *
@@ -121,6 +142,7 @@ button:hover
     width: auto;
 }
 
+/* defines display settings for quiz buttons */
 .quiz-button
 {
     padding: 10px 40px;
@@ -169,11 +191,13 @@ button:hover
 #high-scores-display
 {
     background-color: var(--light-lavender);
-    padding: 10px 35px;
+    padding: 10px 50px;
 }
 
 /* adds a bit of space between individual scores */
 #high-scores-display li
 {
     margin: 10px;
+    border: solid 3px var(--deep-purple);
+    word-wrap: break-word;
 }
