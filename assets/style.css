@@ -198,6 +198,5 @@ button:hover
 #high-scores-display li
 {
     margin: 10px;
-    border: solid 3px var(--deep-purple);
     word-wrap: break-word;
 }
