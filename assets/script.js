@@ -105,6 +105,31 @@ function getHighScores()
     return JSON.parse(localStorage.getItem("highScoresList"));
 }
 
+//compares new score to previous scores, and splices into array such that scores will be in descending order
+function compareScores(highScore)
+{
+    var scoreListings = highScoresList.length;
+
+    for (scoreIndex = 0; scoreIndex < scoreListings; scoreIndex++)
+    {
+        compareScore = highScoresList[scoreIndex].score;
+
+        if (highScore.score > compareScore) //add new score ahead of score it's being compared to if the new score is higher
+        {
+            highScoresList.splice(scoreIndex, 0, highScore);
+            return;
+        }
+        else if (highScore.score === compareScore) //add new score one spot behind score it's being compared to if the new score is equal
+        {
+            highScoresList.splice(scoreIndex + 1, 0, highScore);
+            return;
+        }
+    }
+
+    //if the new score is the smallest, it is added directly to the end of the array
+    highScoresList.push(highScore);
+}
+
 //submits high score to local data storage
 function submitScore()
 {
@@ -117,12 +142,6 @@ function submitScore()
         return;
     }
 
-    //retrieves high scores list from local storage if it exists
-    if (localStorage.getItem("highScoresList"))
-    {
-        highScoresList = getHighScores();
-    }   
-    
     //saves initials and score as an object
     var highScore =
     {
@@ -130,8 +149,16 @@ function submitScore()
         score: timeLeft
     };
 
-    //adds new high score submission to list
-    highScoresList.push(highScore);
+    //retrieves high scores list from local storage if it exists
+    if (localStorage.getItem("highScoresList")) //retrieves high score data and decides where new score should be added to array
+    {
+        highScoresList = getHighScores();
+        compareScores(highScore);
+    }   
+    else //if there are no scores to compare to, adds new score directly to array
+    {
+        highScoresList.push(highScore);
+    }
 
     //submits high score data to local storage as a JSON string, disables submit button, and clears initials input box
     localStorage.setItem("highScoresList", JSON.stringify(highScoresList));
@@ -142,7 +169,7 @@ function submitScore()
 //removes all score listings from high score display
 function removeScoreListings()
 {
-    scoreListings = highScoresDisplay.childElementCount
+    var scoreListings = highScoresDisplay.childElementCount
 
     for (scoreListing = 0; scoreListing < scoreListings; scoreListing++)
     {
