@@ -194,7 +194,7 @@ button:hover
     padding: 10px 50px;
 }
 
-/* adds a bit of space between individual scores */
+/* adds a bit of space between individual scores, prevents obscenely long initials entries */
 #high-scores-display li
 {
     margin: 10px;

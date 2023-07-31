@@ -104,10 +104,11 @@ function submitScore()
         highScoresList.push(highScore);
     }
 
-    //submits high score data to local storage as a JSON string, disables submit button, and clears initials input box
+    //submits high score data to local storage as a JSON string, disables submit button, clears initials input box, and navigates to high scores menu
     localStorage.setItem("highScoresList", JSON.stringify(highScoresList));
     initialsInput.value = "";
     submitButton.disabled = true;
+    viewHighScores();
 }
 
 //removes all score listings from high score display
