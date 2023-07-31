@@ -188,7 +188,7 @@ function viewHighScores()
     highScoresDisplayBox.setAttribute("style", "display: block");
 
     //if statement to avoid a reference error if the user tries to view high scores without ever starting the test
-    if (quizStarted) //if the quiz has been started (at least once), attempts to stop the timer
+    if (startedQuiz) //if the quiz has been started (at least once), attempts to stop the timer
     {
         clearInterval(quizTimerCountdown);
     }
@@ -197,6 +197,14 @@ function viewHighScores()
 
     //attempts to render high scores
     renderHighScores();
+}
+
+//overwrites all high score data with an empty array, and removes all score listings
+function clearHighScores()
+{
+    localStorage.setItem("highScoresList", []);
+    highScoresList = [];
+    removeScoreListings();
 }
 
 //returns to start menu from high score menu
@@ -290,7 +298,7 @@ function beginQuizAttempt()
     timeLeft = 75;
     correctAnswer = "";
     currentQuestion = 1;
-    quizStarted = true;
+    startedQuiz = true;
 
     //hides start menu, unhides question content structure
     startMenu.setAttribute("style", "display: none");
@@ -319,8 +327,11 @@ function beginQuizAttempt()
 //switches view to high score list when user clicks view high scores link
 document.getElementById("HSLink").addEventListener("click", viewHighScores);
 
-//switches view back to start menu from high scores menu
+//switches view back to start menu from high scores menu when user clicks back button
 document.getElementById("go-back").addEventListener("click", backToStart);
+
+//clears all high scores from list when user clicks clear high scores button
+document.getElementById("clear-high-scores").addEventListener("click", clearHighScores);
 
 //begins quiz attempt when start button is clicked
 document.getElementById("start-button").addEventListener("click", beginQuizAttempt);
