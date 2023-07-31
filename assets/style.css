@@ -10,6 +10,7 @@ Last Edited 2023/07/29
 {
     --deep-purple: #582f92;
     --lavender: #a380e5;
+    --light-lavender: #cfc3e5;
 }
 
 /* changes default font & text size */
@@ -28,6 +29,18 @@ h1
 
 /* ADD MEDIA QUERY TO ADJUST HEADER TEXT SIZE AT SMALL PAGE WIDTH HERE */
 
+/* defines display settings for right / wrong messages */
+h2
+{
+    padding-top: 10px;
+    padding-left: 10px;
+    border-top: solid 3px black;
+    font-weight: 400;
+    font-size: 140%;
+    font-style: italic;
+    display: none;
+}
+
 /* list items will be displayed with numbers in descending order*/
 ol
 {
@@ -41,6 +54,19 @@ ol
 {
     display: inline-block;
     padding: 20px;
+}
+
+#HSLink
+{
+    color: var(--deep-purple);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#HSLink:hover
+{
+    color: var(--light-lavender);
+    transition: 0.15s;
 }
 
 /* timer floats to the right */
@@ -70,22 +96,19 @@ ol
     text-align: center;
 }
 
-/* defines display settings for quiz buttons */
-.quiz-button
+/* defines default display settings for buttons */
+button
 {
-    padding: 10px 40px;
     margin: 5px;
     border: none;
     border-radius: 12px;
     color: white;
     background-color: var(--deep-purple);
     cursor: pointer;
-    width: 300px;
-    text-align: left;
 }
 
-/* quiz buttons change colour when hovered */
-.quiz-button:hover
+/* buttons change colour when hovered */
+button:hover
 {
   background-color: var(--lavender);
   transition: 0.15s;
@@ -98,19 +121,59 @@ ol
     width: auto;
 }
 
+.quiz-button
+{
+    padding: 10px 40px;
+    width: 300px;
+    text-align: left;
+}
+
+/* defines alternate padding & width for high score-related buttons */
+.high-score-button
+{
+    padding: 3px 15px;
+    width: auto;
+}
+
+/* displays enter certain high score-related elements in-line with each other */
+.high-score-row
+{
+    display: inline-block;
+}
+
 /* hides question content structure initially */
 #question-content
 {
     display: none;
 }
 
-h2
+/* hides high score submission content initially */
+#high-score-submission
 {
-    padding-top: 10px;
-    padding-left: 10px;
-    border-top: solid 3px black;
-    font-weight: 400;
-    font-size: 140%;
-    font-style: italic;
     display: none;
+}
+
+/* slightly increases margin for all done message at end of quiz and high scores list header */
+.high-score-header
+{
+    margin-bottom: 20px;
+}
+
+/* hides high score menu content initially */
+#high-scores-display-box
+{
+    display: none;
+}
+
+/* defines display settings for high scores list */
+#high-scores-display
+{
+    background-color: var(--light-lavender);
+    padding: 10px 35px;
+}
+
+/* adds a bit of space between individual scores */
+#high-scores-display li
+{
+    margin: 10px;
 }
