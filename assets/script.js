@@ -30,8 +30,8 @@ var highScoresDisplay = document.getElementById("high-scores-display");
 var correct = document.getElementById("correct");
 var wrong = document.getElementById("wrong");
 
-//sets an attribute to startMenu to prevent an error if user gose to high score menu without starting quiz
-startMenu.setAttribute("style", "display: block");
+//variable to prevent an error if user gose to high score menu without starting quiz
+var startedQuiz = false;
 
 //defines first question name, multiple choice options, and correct answer
 function generateQuestion1()
@@ -139,6 +139,17 @@ function submitScore()
     submitButton.disabled = true;
 }
 
+//removes all score listings from high score display
+function removeScoreListings()
+{
+    scoreListings = highScoresDisplay.childElementCount
+
+    for (scoreListing = 0; scoreListing < scoreListings; scoreListing++)
+    {
+        highScoresDisplay.children[0].remove();
+    }
+}
+
 //renders list of high scores
 function renderHighScores()
 {   
@@ -148,6 +159,12 @@ function renderHighScores()
         return;
     }
 
+    //removes any previously-created score listings
+    if (highScoresDisplay.childElementCount != 0)
+    {
+        removeScoreListings();
+    }
+    
     //retrieves high score data from storage
     highScoresList = getHighScores();
 
@@ -171,17 +188,22 @@ function viewHighScores()
     highScoresDisplayBox.setAttribute("style", "display: block");
 
     //if statement to avoid a reference error if the user tries to view high scores without ever starting the test
-    if (startMenu.hasAttribute("style", "display: block")) //if the start menu is visible, hide it
-    {
-        startMenu.setAttribute("style", "display: none");
-    }
-    else //stop the quiz timer
+    if (quizStarted) //if the quiz has been started (at least once), attempts to stop the timer
     {
         clearInterval(quizTimerCountdown);
     }
 
+    startMenu.setAttribute("style", "display: none");
+
     //attempts to render high scores
     renderHighScores();
+}
+
+//returns to start menu from high score menu
+function backToStart()
+{
+    highScoresDisplayBox.setAttribute("style", "display: none");
+    startMenu.setAttribute("style", "display: block")
 }
 
 //changes quiz question content based on which question should be displayed
@@ -268,12 +290,15 @@ function beginQuizAttempt()
     timeLeft = 75;
     correctAnswer = "";
     currentQuestion = 1;
+    quizStarted = true;
 
     //hides start menu, unhides question content structure
     startMenu.setAttribute("style", "display: none");
     questionContent.setAttribute("style", "display: block");
 
     //begins quiz timer countdown, quiz ends once timer is less than or equal to 0
+    quizTimer.textContent = "Time: " + timeLeft;
+
     quizTimerCountdown = setInterval(function()
     {
         timeLeft--;
@@ -293,6 +318,9 @@ function beginQuizAttempt()
 
 //switches view to high score list when user clicks view high scores link
 document.getElementById("HSLink").addEventListener("click", viewHighScores);
+
+//switches view back to start menu from high scores menu
+document.getElementById("go-back").addEventListener("click", backToStart);
 
 //begins quiz attempt when start button is clicked
 document.getElementById("start-button").addEventListener("click", beginQuizAttempt);
