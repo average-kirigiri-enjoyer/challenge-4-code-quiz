@@ -56,6 +56,19 @@ ol
     padding: 20px;
 }
 
+#HSLink
+{
+    color: var(--deep-purple);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#HSLink:hover
+{
+    color: var(--light-lavender);
+    transition: 0.15s;
+}
+
 /* timer floats to the right */
 #timer
 {
@@ -147,7 +160,7 @@ button:hover
 }
 
 /* hides high score menu content initially */
-#high-score-display-menu
+#high-scores-display-box
 {
     display: none;
 }

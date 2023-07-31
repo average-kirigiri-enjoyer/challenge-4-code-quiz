@@ -14,6 +14,7 @@ var highScoresList = [];
 
 //gets references to various HTML elements that will be modified or referred to
 var quizTimer = document.getElementById("timer");
+var startMenu = document.getElementById("start-menu");
 var questionContent = document.getElementById("question-content");
 var questionTitle = document.getElementById("question-title");
 var answerOptions = document.getElementById("answer-options");
@@ -24,8 +25,13 @@ var option4 = document.getElementById("option-4").children[0];
 var highScoreSubmission = document.getElementById("high-score-submission");
 var initialsInput = document.querySelector("input");
 var submitButton = document.getElementById("submit-button");
+var highScoresDisplayBox = document.getElementById("high-scores-display-box");
+var highScoresDisplay = document.getElementById("high-scores-display");
 var correct = document.getElementById("correct");
 var wrong = document.getElementById("wrong");
+
+//sets an attribute to startMenu to prevent an error if user gose to high score menu without starting quiz
+startMenu.setAttribute("style", "display: block");
 
 //defines first question name, multiple choice options, and correct answer
 function generateQuestion1()
@@ -88,7 +94,7 @@ function endAttempt()
     clearInterval(quizTimerCountdown);
     questionContent.setAttribute("style", "display: none");
     highScoreSubmission.setAttribute("style", "display: block");
-    quizTimer.textContent = "Timer: " + timeLeft;
+    quizTimer.textContent = "Time: " + timeLeft;
     document.getElementById("final-score").textContent = "Final Score: " + timeLeft;
     submitButton.disabled = false;
 }
@@ -104,12 +110,10 @@ function submitScore()
 {
     //gets initials input by user from text box
     var userInitials = initialsInput.value;
-    console.log(userInitials)
 
     //if user did not type in any initials, eject from function
     if (!userInitials)
     {
-        console.log("no initials entered")
         return;
     }
 
@@ -128,12 +132,56 @@ function submitScore()
 
     //adds new high score submission to list
     highScoresList.push(highScore);
-    console.log(highScoresList);
 
     //submits high score data to local storage as a JSON string, disables submit button, and clears initials input box
     localStorage.setItem("highScoresList", JSON.stringify(highScoresList));
     initialsInput.value = "";
     submitButton.disabled = true;
+}
+
+//renders list of high scores
+function renderHighScores()
+{   
+    //if there are no high scores in storage, ejects from function
+    if (!localStorage.getItem("highScoresList"))
+    {
+        return;
+    }
+
+    //retrieves high score data from storage
+    highScoresList = getHighScores();
+
+    //creates a new list item for each score in storage, and adds it to the list of high scores 
+    for (score = 0; score < highScoresList.length; score++)
+    {
+        var scoreData = highScoresList[score];
+        var scoreListing = document.createElement("li");
+        scoreListing.textContent = scoreData.initials + " - " + scoreData.score;
+        highScoresDisplay.appendChild(scoreListing);
+    }
+}
+
+function viewHighScores()
+{
+    //hides whatever quiz content is currently visible and loads high score display menu
+    correct.setAttribute("style", "display: none");
+    wrong.setAttribute("style", "display: none");
+    questionContent.setAttribute("style", "display: none");
+    highScoreSubmission.setAttribute("style", "display: none");
+    highScoresDisplayBox.setAttribute("style", "display: block");
+
+    //if statement to avoid a reference error if the user tries to view high scores without ever starting the test
+    if (startMenu.hasAttribute("style", "display: block")) //if the start menu is visible, hide it
+    {
+        startMenu.setAttribute("style", "display: none");
+    }
+    else //stop the quiz timer
+    {
+        clearInterval(quizTimerCountdown);
+    }
+
+    //attempts to render high scores
+    renderHighScores();
 }
 
 //changes quiz question content based on which question should be displayed
@@ -185,10 +233,11 @@ function checkAnswer()
     }
     else
     {
-        //if the user was wrong, reduce remaining time by 10 seconds
+        //if the user was wrong, reduce remaining time by 10 seconds and updates timer
         wrong.setAttribute("style", "display: block");
         correct.setAttribute("style", "display: none");
         timeLeft -= 10;
+        quizTimer.textContent = "Time: " + timeLeft;
     }
 
     //hides right / wrong message after around two seconds if the user has not chosen another answer
@@ -213,11 +262,6 @@ function checkAnswer()
     generateQuestions();
 }
 
-function viewHighScores()
-{
-    //switch to high score list n' stuff
-}
-
 function beginQuizAttempt()
 {
     //sets / resets initial variables for quiz content flow
@@ -226,19 +270,19 @@ function beginQuizAttempt()
     currentQuestion = 1;
 
     //hides start menu, unhides question content structure
-    document.getElementById("start-menu").setAttribute("style", "display: none");
+    startMenu.setAttribute("style", "display: none");
     questionContent.setAttribute("style", "display: block");
 
     //begins quiz timer countdown, quiz ends once timer is less than or equal to 0
     quizTimerCountdown = setInterval(function()
     {
         timeLeft--;
-        quizTimer.textContent = "Timer: " + timeLeft;
+        quizTimer.textContent = "Time: " + timeLeft;
 
         if (timeLeft <= 0)
         {
             clearInterval(quizTimerCountdown);
-            quizTimer.textContent = "Timer: 0"
+            quizTimer.textContent = "Time: 0"
             endAttempt();
         }
     }, 1000);
@@ -247,7 +291,7 @@ function beginQuizAttempt()
     generateQuestions();
 }
 
-//switches view to high score list
+//switches view to high score list when user clicks view high scores link
 document.getElementById("HSLink").addEventListener("click", viewHighScores);
 
 //begins quiz attempt when start button is clicked
@@ -256,4 +300,5 @@ document.getElementById("start-button").addEventListener("click", beginQuizAttem
 //when the user clicks one of the multiple choice options, checks if their answer is correct
 answerOptions.addEventListener("click", checkAnswer);
 
+//attempts to submit high score to local storage when user clicks submit score button
 submitButton.addEventListener("click", submitScore);
