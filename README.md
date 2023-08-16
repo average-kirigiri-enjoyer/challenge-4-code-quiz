@@ -8,7 +8,7 @@ When learning about and engaging with a new field of knowledge, it is important 
 
 Take the coding quiz here;
 
-https://average-kirigiri-enjoyer.github.io/challenge-4-code-quiz/
+https://average-kirigiri-enjoyer.github.io/challenge-4-timed-coding-quiz/
 
 On the page, you will be greeted by three things. First, a view high scores link in the top left, which can be clicked at any time to view any available high scores. Note that switching to the high scores menu will end an in-progress quiz attempt without a submission. There will be a menu in the middle of the page giving a brief description of the quiz, and a start button which you can press to begin the quiz. There will also be a timer in the top right which will begin counting down when you start the quiz.
 
