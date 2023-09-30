@@ -2,7 +2,7 @@
 
 ## Description
 
-When learning about and engaging with a new field of knowledge, it is important to periodically test said knowledge to see how well you are doing. It allows you an insight into where you're doing well, and where you need to improve. As such, this web application provides the opportunity to test your basic coding knowledge, and to submit the results to a local database to see how your performance compares to others.
+When learning about and engaging with a new field of knowledge, it is important to periodically test said knowledge to see how well you are doing. It allows you an insight into where you're doing well, and where you need to improve. As such, this web application provides the opportunity to test your basic coding knowledge, and to submit the results to a local database to see how your performance compares to that of others.
 
 ## Usage
 
